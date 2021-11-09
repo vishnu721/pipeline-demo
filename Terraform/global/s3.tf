@@ -1,7 +1,7 @@
-resource "aws_s3_bucket" "s3-bucket" {
-  bucket = "terraform-remote-state"
+resource "aws_s3_bucket" "vishnu-remote" {
+  bucket = "vishnu-remote"
   versioning {
-      enabled = True
+      enabled = true
     }
   server_side_encryption_configuration {
     rule {
@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "s3-bucket" {
     }
   }
   tags = {
-    "Name" = "terraform-remote-state"
+    "Name" = "vishnu-remote"
     "Description" = "Terraform remote state s3 bucket"
   }
 }
