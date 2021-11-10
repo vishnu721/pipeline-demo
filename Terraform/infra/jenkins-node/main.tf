@@ -38,17 +38,42 @@ resource "aws_instance" "jenkins-node" {
 
 resource "aws_security_group" "jenkins-node-sg" {
   name = "jenkins-node-sg"
+  
   vpc_id = data.terraform_remote_state.vpc_info.outputs.vpc_id
   ingress = [ {
+    description = "Allow SSH from Jenkins Master"
     cidr_blocks = [ "${data.terraform_remote_state.jenkins-master.outputs.public-ip}/32" ]
     from_port = 22
     protocol = "tcp"
     to_port = 22
+    ipv6_cidr_blocks = []
+    prefix_list_ids = []
+    security_groups = []
+    self = false
+  },
+   {
+    description = "Allow SSH from Local system"
+    cidr_blocks = [ "122.171.168.76/32" ]
+    from_port = 22
+    protocol = "tcp"
+    to_port = 22
+    ipv6_cidr_blocks = []
+    prefix_list_ids = []
+    security_groups = []
+    self = false
   } ]
   egress = [ {
     cidr_blocks = [ "0.0.0.0/0" ]
     from_port = 0
     protocol = "-1"
     to_port = 0
+    description = "Outbound all"
+    ipv6_cidr_blocks = ["::/0"]
+    prefix_list_ids = []
+    security_groups = []
+    self = false
+
   } ]
+
+  
 }
