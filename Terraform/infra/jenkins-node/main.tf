@@ -74,6 +74,9 @@ resource "aws_security_group" "jenkins-node-sg" {
     self = false
 
   } ]
-
+  
+  tags = {
+    "Name" = "jenkins-node-sg"
+  }
   
 }
