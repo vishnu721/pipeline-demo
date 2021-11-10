@@ -1,0 +1,9 @@
+---
+- name: Install apache2
+  become: yes
+
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: present
