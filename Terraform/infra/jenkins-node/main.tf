@@ -21,7 +21,7 @@ resource "aws_instance" "jenkins-node" {
   instance_type          = "t2.micro"
   key_name               = "LinuxServer"
   vpc_security_group_ids = ["${data.terraform_remote_state.vpc_info.outputs.default_security_group_id}",
-  "aws_security_group.jenkins-node-sg.id"]
+  "${aws_security_group.jenkins-node-sg.id}"]
   #security_groups = [ "jenkins-node-sg" ]
   subnet_id              = data.terraform_remote_state.vpc_info.outputs.public_subnet_ids[0]
   tags = {
